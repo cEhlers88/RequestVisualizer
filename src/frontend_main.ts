@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded',() => {
     if (main) {
         main.appendChilds([
             domLib.createElement('div',{class: 'panel main-infos', childNodes:[
-                domLib.createElement('h1',{innerText:'Requests visualizer'}),
+                domLib.createElement('h1',{innerText:'RequestVisualizer'}),
                 headInfoDataGrid
             ]}),
             domLib.createElement('requests-visualizer'),

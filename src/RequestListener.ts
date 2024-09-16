@@ -1,4 +1,4 @@
-import express, {Express, NextFunction, Request, Response} from "express";
+import express, {Express, Request, Response} from "express";
 import http from "http";
 import {Server} from "node:net";
 import {IRequestInfo} from "./interface/IRequestInfo";
@@ -11,7 +11,6 @@ export default class RequestListener {
     private _server: Server;
     constructor(targetServerUrl: string|null) {
         this._app = express();
-
         if(targetServerUrl!==null){
             const proxy = createProxyMiddleware({
                 target: targetServerUrl,
@@ -40,6 +39,10 @@ export default class RequestListener {
         });
     }
     private _handleRequests(req: Request, res: Response, endCallback:()=>void = ()=>{}) {
+        if(this._blacklistUrls.includes(req.url)){
+            res.status(403).send('blacklisted');
+            return;
+        }
         const reqInfo: IRequestInfo = {
             method: req.method,
             url: req.url,
@@ -54,6 +57,4 @@ export default class RequestListener {
             endCallback();
         });
     }
-
-
 }

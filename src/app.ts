@@ -12,7 +12,7 @@ const io = new SocketIOServer(frontendServer);
 frontendApp.use(express.static('public'));
 
 const requestListener:RequestListener = new RequestListener(process.env.PROXY_TARGET || null);
-requestListener.listen(Number(process.env.PORT_REQUEST_LISTENER || 3000), (reqInfo:IRequestInfo) => {
+requestListener.listen(Number(process.env.PORT_REQUEST_LISTENER || 4000), (reqInfo:IRequestInfo) => {
     io.emit('request_received', {
         ...reqInfo,
         env: {
@@ -23,7 +23,7 @@ requestListener.listen(Number(process.env.PORT_REQUEST_LISTENER || 3000), (reqIn
     });
 });
 
-const frontendPort = Number(process.env.PORT_FRONTEND || 4000);
+const frontendPort = Number(process.env.PORT_FRONTEND || 3000);
 frontendServer.listen(frontendPort, () => {
     console.log(`Frontend server listening at port ${frontendPort}`);
 });

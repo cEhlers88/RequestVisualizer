@@ -1,0 +1,91 @@
+@import "variables";
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  height: 100vh;
+}
+
+body > main {
+  height: calc(100% - 35px);
+}
+
+body {
+  background-color: $secondary-color;
+    display: flex;
+    flex-direction: column;
+  > main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-gap: 5px;
+    .main-infos {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+    requests-visualizer {
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+    .panel, requests-visualizer {
+      background-color: #fff;
+      border: 1px solid #000;
+    }
+  }
+  > footer {
+    background-color: $primary-color;
+    color:white;
+    font-size: 11px;
+    padding: 10px;
+    text-align: center;
+  }
+}
+requests-visualizer .history-bullets {
+  padding: 5px;
+  display: flex;
+  gap: 5px;
+  background-color: $secondary-color;
+  >* {
+    font-size: 14px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 1px 10px;
+
+    &.method--get {
+      background-color: #00ff00;
+    }
+    &.method--post {
+      background-color: #27a7fd;
+    }
+    &.method--delete {
+      background-color: #ff00ff;
+    }
+    &.method--put {
+      background-color: #f7ff00;
+    }
+    &.method--patch {
+      background-color: #ff7f00;
+    }
+    &.method--options {
+      background-color: #ff5d5d;
+    }
+    &.method--head {
+      background-color: #89fff7;
+    }
+
+  }
+}
+requests-visualizer .output-container {
+  overflow: auto;
+  > *:nth-child(4n+1), > *:nth-child(4n+2) {
+      background-color: #f0f0f0;
+  }
+}
+data-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 5px;
+}
